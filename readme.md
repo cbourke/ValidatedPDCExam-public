@@ -8,7 +8,8 @@ curricula (CS0/1/2).
 
 ## Version
 
-The current version is 0.1.0
+* Version 0.1.1 - minor fixes
+* Version 0.1.0 - initial public version
 
 ## Formats
 
