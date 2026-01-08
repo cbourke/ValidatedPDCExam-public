@@ -107,4 +107,4 @@ if __name__ == "__main__":
         print(f"Please review and modify the {input_json} file before running the script again.")
 
     # Run the conversion
-    generate_moodle_xml(input_json_file, 'test_question_bankv0.1.0.xml')
+    generate_moodle_xml(input_json_file, 'test_question_bankv0.1.1.xml')

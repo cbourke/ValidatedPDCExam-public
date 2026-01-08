@@ -46,7 +46,7 @@ def generate_text(json_file_path, output_file_path="moodle_quiz.txt"):
 
 if __name__ == "__main__":
     # Specify the path to your JSON input file
-    input_json_file = "question_bank_v0.1.0.json" 
+    input_json_file = "question_bank_v0.1.1.json" 
     
     # Ensure the example JSON file exists for testing
     if not os.path.exists(input_json_file):
@@ -78,4 +78,4 @@ if __name__ == "__main__":
         print(f"Please review and modify the {input_json} file before running the script again.")
 
     # Run the conversion
-    generate_text(input_json_file, 'test_question_bankv0.1.0.txt')
+    generate_text(input_json_file, 'test_question_bankv0.1.1.txt')
