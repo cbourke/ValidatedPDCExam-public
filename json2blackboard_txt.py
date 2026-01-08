@@ -1,20 +1,16 @@
 import json
 import os
 
-## modified from json2xml.py to output the questions in a plain text format
-##   Question
-##      A)  First choice
-##      B)  Second choice
-##      etc.
-#   correct choice: 
+## modified from json2xml.py to output the questions in a plain text format to be uploadable into Blackboard
+## according to the documentation here:
+## https://help.blackboard.com/Learn/Instructor/Original/Tests_Pools_Surveys/Orig_Reuse_Questions/Upload_Questions
+##   MC \t question_text answer_one correct|incorect answer_two correct|incorrect
 
-def generate_text(json_file_path, output_file_path="moodle_quiz.txt"):
+def generate_text(json_file_path, output_file_path="blackboard.txt"):
     """
     Reads multiple-choice questions from a JSON file and converts them
     into txt format.
     """
-    
-    letter_labels = ['A)', 'B)', 'C)', 'D)', 'E)', 'F)']
     
     # 1. Read the JSON data
     try:
@@ -31,15 +27,18 @@ def generate_text(json_file_path, output_file_path="moodle_quiz.txt"):
 
     questions = questions_file["questions"]
     for q_data in questions:
-        outfile.write("question: " + q_data['text'] + '\n')
+        outfile.write("MC\t" + q_data['text'] + '\t')
         indx = 0
+        correct_indx = q_data['correct_choice_index']
         for choice in q_data['choices']:
-            outfile.write('\t' + letter_labels[indx] + ' ' + choice + '\n')
+            outfile.write(choice)
+            if indx == correct_indx:
+                outfile.write('\tcorrect\t')
+            else:
+                outfile.write('\tincorrect\t')
             indx += 1
-        
-        correct_indx = q_data['correct_choice_index'];
-        
-        outfile.write("correct choice: " + letter_labels[correct_indx] + '\n\n\n')
+        outfile.write('\n')
+
         
     outfile.close()
         
@@ -78,4 +77,4 @@ if __name__ == "__main__":
         print(f"Please review and modify the {input_json} file before running the script again.")
 
     # Run the conversion
-    generate_text(input_json_file, 'test_question_bankv0.1.1.txt')
+    generate_text(input_json_file, 'test_question_bankv0.1.1_blackboard.txt')
